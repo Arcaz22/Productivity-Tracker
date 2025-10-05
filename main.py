@@ -1,4 +1,3 @@
-import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
@@ -7,6 +6,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.routers.auth import router as auth_router
 from app.routers.user import router as user_router
 from app.routers.activity_categories import router as activity_categories_router
+from app.routers.performance_standards import router as performance_standards_router
 from app.routers.test import router as test_router
 
 from app.core.database import engine, Base, SessionLocal
@@ -38,6 +38,7 @@ app.add_middleware(
 app.include_router(auth_router, tags=["auth"])
 app.include_router(user_router, tags=["user"])
 app.include_router(activity_categories_router, tags=["master"])
+app.include_router(performance_standards_router, tags=["master"])
 app.include_router(test_router, tags=["test"])
 
 @app.get("/")
